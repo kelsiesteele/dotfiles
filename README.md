@@ -8,7 +8,7 @@ These are my dotfiles and general system preferences adapted for Debian-type Lin
 
 This script has been successfully tested on the following Linux distros:
 
-* Ubuntu 12,04 LTS, 14.04 LTS, 15.04 Beta 2
+* Ubuntu 12.04 LTS, 14.04 LTS, 15.04 Beta 2
 * Lubuntu 14.10
 * Debian 7.8
 
