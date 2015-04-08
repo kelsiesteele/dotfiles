@@ -172,6 +172,13 @@ HISTFILE=~/.zsh_history
 # }}}
 
 
+# functions {{{
+randpw() {
+  < /dev/urandom tr -dc _a-z-0-9 | head -c${1:-8};echo;
+}
+# }}}
+
+
 # Rbenv {{{
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
