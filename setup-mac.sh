@@ -141,9 +141,9 @@ if [[ -d $DOTFILES_DIR ]]; then
   rm -rf $DOTFILES_DIR
 fi
 
-fancy_echo "Cloning joshukraine/dotfiles repo to ${DOTFILES_DIR} ..."
+fancy_echo "Cloning kelsiesteele/dotfiles repo to ${DOTFILES_DIR} ..."
 
-git clone https://github.com/joshukraine/dotfiles.git $DOTFILES_DIR
+git clone git@github.com:kelsiesteele/dotfiles.git $DOTFILES_DIR
 source "$DOTFILES_DIR/install/symlink_dotfiles.sh"
 
 fancy_echo "Dotfiles setup complete!"

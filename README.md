@@ -24,12 +24,12 @@ Reboot, check for additional updates, then reinstall, reboot if needed.
 To install with a one-liner, run this:
 
 ```sh
-curl --remote-name https://raw.githubusercontent.com/joshukraine/dotfiles/master/setup-mac.sh && sh setup-mac.sh 2>&1 | tee ~/setup.log
+curl --remote-name https://raw.githubusercontent.com/kelsiesteele/dotfiles/master/setup-mac.sh && sh setup-mac.sh 2>&1 | tee ~/setup.log
 ```
 
 Want to read through the script first?
 ```sh
-curl --remote-name https://raw.githubusercontent.com/joshukraine/dotfiles/master/setup-mac.sh
+curl --remote-name https://raw.githubusercontent.com/kelsiesteele/dotfiles/master/setup-mac.sh
 less setup-mac.sh
 sh setup-mac.sh 2>&1 | tee ~/setup.log
 ```
@@ -97,8 +97,7 @@ No one else's dotfiles will ever be a perfect match for you. That said, if your 
 
 5) Update the README with your own info, instructions/reminders so you don't forget what you did, and especially the correct install URL:
 
-	bash <(wget -qO- https://raw.githubusercontent.com/<your-github-username>/dotfiles/linux/setup-linux.sh) 2>&1 | tee ~/setup-linux.log
-
+	curl --remote-name https://raw.githubusercontent.com/<your-github-username/dotfiles/master/setup-mac.sh && sh setup-mac.sh 2>&1 | tee ~/setup.log
 6) Run the script on your machine and wait for the first error. :) Then fix, commit, push, and repeat.
 
 ### Some of my favorite dotfile repos
