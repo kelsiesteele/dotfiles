@@ -27,10 +27,10 @@ fancy_echo() { # Thank you, thoughtbot. :)
 fancy_echo "- Setting General UI/UX defaults..."
 
 # Set computer name (as done via System Preferences → Sharing)
-sudo scutil --set ComputerName "Joshua's MacBook Pro"
-sudo scutil --set HostName "joshuas-mbp"
-sudo scutil --set LocalHostName "joshuas-mbp"
-sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "joshuas-mbp"
+sudo scutil --set ComputerName "Kelsie's MacBook Air"
+sudo scutil --set HostName "kelsies-mba"
+sudo scutil --set LocalHostName "kelsies-mba"
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "kelsies-mba"
 
 # Show scrollbars only when scrolling
 defaults write NSGlobalDomain AppleShowScrollBars -string "WhenScrolling"
@@ -60,7 +60,10 @@ defaults write com.apple.helpviewer DevMode -bool true
 defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 
 # Disable guest login -- NOTE: This doesn't actually work due to Parental Controls bug.
-# sudo defaults write /Library/Preferences/com.apple.loginwindow GuestEnabled -bool NO
+sudo defaults write /Library/Preferences/com.apple.loginwindow GuestEnabled -bool NO
+
+# Disable transparency in the menu bar and elsewhere on Yosemite
+defaults write com.apple.universalaccess reduceTransparency -bool true
 
 ###############################################################################
 # SSD-specific tweaks                                                         #
@@ -195,8 +198,8 @@ defaults write com.apple.dock showhidden -bool true
 # No bouncing icons
 # defaults write com.apple.dock no-bouncing -bool true
 
-# Set the icon size of Dock items to 72 pixels
-defaults write com.apple.dock tilesize -int 72
+# Set the icon size of Dock items to 50 pixels
+defaults write com.apple.dock tilesize -int 50
 
 ###############################################################################
 # Dashboard & Spaces                                                          #
