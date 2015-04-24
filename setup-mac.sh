@@ -143,6 +143,7 @@ fi
 
 fancy_echo "Cloning kelsiesteele/dotfiles repo to ${DOTFILES_DIR} ..."
 
+cd $HOME
 git clone git@github.com:kelsiesteele/dotfiles.git $DOTFILES_DIR
 source "$DOTFILES_DIR/install/symlink_dotfiles.sh"
 
