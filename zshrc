@@ -87,7 +87,7 @@ alias statpost='ps aux | ag postgres'
 
 # Homebrew
 alias bu='brew update'
-alias bg='brew upgrade'
+alias bg='brew upgrade --all'
 alias bo='brew outdated'
 alias bd='brew doctor'
 alias bc='brew cleanup'
@@ -130,14 +130,18 @@ function my_git_branch() {
   if [[ "$(command git config --get oh-my-zsh.hide-status 2>/dev/null)" != "1" ]]; then
     ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
     ref=$(command git rev-parse --short HEAD 2> /dev/null) || return 0
-    echo "${ref#refs/heads/}$(parse_git_dirty)"
+    echo " $ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$(parse_git_dirty)$(git_prompt_status)$(git_commits_ahead)$ZSH_THEME_GIT_PROMPT_SUFFIX"
   fi
 }
+
+ZSH_THEME_GIT_COMMITS_AHEAD_PREFIX="%{$fg[magenta]%}(↑"
+ZSH_THEME_GIT_COMMITS_AHEAD_SUFFIX=")%{$fg[white]%}"
 
 ZSH_THEME_GIT_PROMPT_PREFIX="["
 ZSH_THEME_GIT_PROMPT_SUFFIX="]"
 ZSH_THEME_GIT_PROMPT_DIRTY=""
 ZSH_THEME_GIT_PROMPT_CLEAN=""
+ZSH_THEME_GIT_PROMPT_AHEAD=""
 ZSH_THEME_GIT_PROMPT_ADDED="%{$fg[green]%}+%{$fg[white]%}"
 ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[red]%}*%{$fg[white]%}"
 ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%}-%{$fg[white]%}"
@@ -148,7 +152,7 @@ ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[cyan]%}#%{$fg[white]%}"
 local user='%{$fg[green]%}%m:%{$reset_color%}'
 local ssh_user='%{$fg[magenta]%}%n@%m:%{$reset_color%}'
 local pwd='%{$fg[blue]%}%~%{$reset_color%}'
-local git='%{$fg[white]%}[$(my_git_branch)$(git_prompt_status)]%{$reset_color%}'
+local git='%{$fg[white]%}$(my_git_branch)%{$reset_color%}'
 
 _rubyprompt() {
   if [ $COLUMNS -gt 80 ]; then
@@ -157,9 +161,9 @@ _rubyprompt() {
 }
 
 if [[ -n $SSH_CONNECTION ]]; then
-  PROMPT="${ssh_user}${pwd} ${git} %% "
+  PROMPT="${ssh_user}${pwd}${git} %% "
 else
-  PROMPT="${user}${pwd} ${git} %% "
+  PROMPT="${pwd}${git} %% "
 fi
 
 setopt transient_rprompt # only show the rprompt on the current prompt
