@@ -182,7 +182,6 @@ Plugin 'skwp/greplace.vim'                " Global search and replace for vi    
 Plugin 'rking/ag.vim'                     " Vim plugin for the_silver_searcher                    | https://github.com/rking/ag.vim
 Plugin 'christoomey/vim-tmux-navigator'   " Seamless navigation between tmux panes and vim splits | https://github.com/christoomey/vim-tmux-navigator
 Plugin 'ctrlpvim/ctrlp.vim'               " Active fork of kien/ctrlp.vim—Fuzzy file finder       | https://github.com/ctrlpvim/ctrlp.vim
-Plugin 'MattesGroeger/vim-bookmarks'      " Vim bookmark plugin                                   | https://github.com/MattesGroeger/vim-bookmarks
 
 " Look and Feel
 Plugin 'altercation/vim-colors-solarized' " Precision colorscheme for the vim text editor         | https://github.com/altercation/vim-colors-solarized
@@ -247,6 +246,9 @@ nnoremap <leader><leader> <c-^> " Switch between the last two files
 map Q <Nop> " Disable Ex mode
 map K <Nop> " Disable K looking stuff up
 nmap <leader>O O<Esc> " Add new line ABOVE without leaving normal mode
+
+" Delete all lines beginning with '#' regardless of leading space.
+map <leader>d :g/^\s*#.*/d<CR>:nohl<CR>
 
 " Run 'git blame' on a selection of code
 vmap <leader>gb :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
@@ -424,11 +426,8 @@ let g:airline_right_sep=''
 
 " Colorscheme {{{
 
-" Light theme
-" set background=light
-" colorscheme solarized
-
-" Dark theme
-set background=dark
+" set background=light " light theme
+set background=dark " dark theme
 colorscheme solarized
+
 " }}}
