@@ -1,10 +1,12 @@
 # Exports {{{
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+export PATH=$HOME/.bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin
 export EDITOR="vim"
 export BUNDLER_EDITOR="vim"
 export MANPAGER="less -X" # Don’t clear the screen after quitting a manual page
 export TERM="screen-256color"
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
 # }}}
 
 
@@ -41,8 +43,8 @@ alias src='source ~/.zshrc'
 alias pi='ping -Anc 5 8.8.8.8'
 alias path='echo -e ${PATH//:/\\n}'
 alias ..='cd ..'
-alias ...='cd ../../../'
-alias ....='cd ../../../../'
+alias ...='cd ../../'
+alias ....='cd ../../../'
 alias .....='cd ../../../../'
 alias .2='cd ../../'
 alias .3='cd ../../../'
@@ -200,6 +202,16 @@ alias tsrc="tmux source-file ~/.tmux.conf"
 # Kill all tmux sessions
 alias tka="tmux ls | cut -d : -f 1 | xargs -I {} tmux kill-session -t {}" # tmux kill all sessions
 
+# Always in tmux :)
+_not_inside_tmux() { [[ -z "$TMUX" ]] }
+
+ensure_tmux_is_running() {
+  if _not_inside_tmux; then
+    tat
+  fi
+}
+
+ensure_tmux_is_running
 # }}}
 
 
