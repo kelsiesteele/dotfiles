@@ -30,11 +30,11 @@ set incsearch
 " Highlight search matches
 set hlsearch
 
-" Ignore case in search
-set smartcase
-
-" Make sure any searches /searchPhrase doesn't need the \c escape character
+" Ignore case in search if term(s) are lowercase
 set ignorecase
+
+" Search with case sensitivity if term(s) are upper or mixed case
+set smartcase
 
 " A buffer is marked as ‘hidden’ if it has unsaved changes, and it is not
 " currently loaded in a window.
@@ -133,7 +133,7 @@ set textwidth=80
 set colorcolumn=+1
 
 " Keep focus split large, others minimal
-set winwidth=84
+set winwidth=90
 set winheight=7
 set winminheight=7
 set winheight=999
@@ -182,6 +182,8 @@ Plugin 'skwp/greplace.vim'                " Global search and replace for vi    
 Plugin 'rking/ag.vim'                     " Vim plugin for the_silver_searcher                    | https://github.com/rking/ag.vim
 Plugin 'christoomey/vim-tmux-navigator'   " Seamless navigation between tmux panes and vim splits | https://github.com/christoomey/vim-tmux-navigator
 Plugin 'ctrlpvim/ctrlp.vim'               " Active fork of kien/ctrlp.vim—Fuzzy file finder       | https://github.com/ctrlpvim/ctrlp.vim
+Plugin 'joshukraine/yankmatches'          " Damian Conway's yankmatches plugin for vim            | https://github.com/joshukraine/yankmatches
+Plugin 'joshukraine/dragvisuals'          " Damian Conway's dragvisuals plugin for vim            | https://github.com/joshukraine/dragvisuals
 
 " Look and Feel
 Plugin 'altercation/vim-colors-solarized' " Precision colorscheme for the vim text editor         | https://github.com/altercation/vim-colors-solarized
@@ -209,7 +211,8 @@ Plugin 'skalnik/vim-vroom'                " A vim plugin for running your Ruby t
 Plugin 'MarcWeber/vim-addon-mw-utils'     " [vim-snipmate dependency]                             | https://github.com/MarcWeber/vim-addon-mw-utils
 Plugin 'tomtom/tlib_vim'                  " [vim-snipmate dependency]                             | https://github.com/tomtom/tlib_vim
 Plugin 'garbas/vim-snipmate'              " Textmate-style snippet behavior for vim               | https://github.com/garbas/vim-snipmate
-Plugin 'honza/vim-snippets'               " vim-snipmate default snippets                         | https://github.com/honza/vim-snippets
+" Plugin 'honza/vim-snippets'               " vim-snipmate default snippets                         | https://github.com/honza/vim-snippets
+Plugin 'joshukraine/vim-snippets'         " My customized vim-snippets                            | https://github.com/joshukraine/vim-snippets
 
 " Other
 Plugin 'kchmck/vim-coffee-script'         " CoffeeScript support for vim                          | https://github.com/kchmck/vim-coffee-script
@@ -256,9 +259,13 @@ map <leader>d :g/^\s*#.*/d<CR>:nohl<CR>
 " Run 'git blame' on a selection of code
 vmap <leader>gb :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
 
-" zoom a vim pane, <C-w>= to re-balance
+" zoom a vim pane like in tmux
 nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
+" zoom back out
 nnoremap <leader>= :wincmd =<cr>
+
+" Force vim to use 'very magic' mode for regex searches
+nnoremap / /\v
 
 " Reminders :)
 nnoremap <Left> :echoe "Use h"<CR>
@@ -354,6 +361,18 @@ let g:github_token = $GITHUB_TOKEN
 let g:gist_detect_filetype = 1
 let g:gist_open_browser_after_post = 1
 
+" Key mappings for dragvisuals.vim
+
+runtime bundle/dragvisuals/plugins/dragvisuals.vim
+
+vmap  <expr>  <LEFT>   DVB_Drag('left')
+vmap  <expr>  <RIGHT>  DVB_Drag('right')
+vmap  <expr>  <DOWN>   DVB_Drag('down')
+vmap  <expr>  <UP>     DVB_Drag('up')
+vmap  <expr>  D        DVB_Duplicate()
+
+" Remove any introduced trailing whitespace after moving...
+let g:DVB_TrimWS = 1
 " }}}
 
 
@@ -382,9 +401,12 @@ autocmd FileType markdown setlocal spell
 " Remove trailing whitespace on save for ruby files.
 au BufWritePre *.rb :%s/\s\+$//e
 
-" Close all folds when opening a new buffer
+" Fold settings
 autocmd BufRead * setlocal foldmethod=marker
 autocmd BufRead * normal zM
+autocmd BufRead *.rb setlocal foldmethod=syntax
+autocmd BufRead *.rb normal zR
+set foldnestmax=3
 
 " Close vim if only nerdtree window is left
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
@@ -434,5 +456,8 @@ let g:airline_right_sep=''
 " set background=light " light theme
 set background=dark " dark theme
 colorscheme solarized
+
+highlight clear IncSearch
+highlight IncSearch term=reverse cterm=reverse ctermfg=7 ctermbg=0 guifg=Black guibg=Yellow
 
 " }}}
