@@ -1,5 +1,5 @@
 # Exports {{{
-export PATH=$HOME/.bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin
+export PATH=$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin
 export EDITOR="vim"
 export BUNDLER_EDITOR="vim"
 export MANPAGER="less -X" # Don’t clear the screen after quitting a manual page
@@ -7,15 +7,17 @@ export TERM="screen-256color"
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
+export SOURCE_ANNOTATION_DIRECTORIES="spec"
 # }}}
 
 
 # oh-my-zsh {{{
 export ZSH=$HOME/.oh-my-zsh
-export UPDATE_ZSH_DAYS=7
-COMPLETION_WAITING_DOTS="true"
+DISABLE_UPDATE_PROMPT=true
+DISABLE_AUTO_UPDATE=true
+COMPLETION_WAITING_DOTS=true
 
-plugins=(git pow vagrant)
+plugins=(git brew rails)
 
 source $ZSH/oh-my-zsh.sh
 # }}}
@@ -24,8 +26,8 @@ source $ZSH/oh-my-zsh.sh
 # Aliases {{{
 
 # Vim specific
-alias vi="vim"
-alias vir="vim -R"
+alias vi='vim'
+alias vir='vim -R'
 alias ct='ctags -R --languages=ruby --exclude=.git --exclude=log . $(bundle list --paths)'
 
 # Jump to quick edits
@@ -36,7 +38,7 @@ alias ev='vim ~/.vimrc'
 # General UNIX
 alias mv='mv -iv'
 alias cp='cp -iv'
-alias rm='rm -iv'
+alias srm='srm -iv'
 alias df='df -h'
 alias du='du -h'
 alias mkdir='mkdir -pv'
@@ -74,19 +76,20 @@ alias upz='upgrade_oh_my_zsh'
 alias saf='defaults write com.apple.finder AppleShowAllFiles TRUE; killall Finder'
 alias haf='defaults write com.apple.finder AppleShowAllFiles FALSE; killall Finder'
 
-# Rails
-alias rc='rails console'
-alias rg='rails generate'
-alias rs='rails server'
-alias rsp='rspec . --format documentation' #Run full test suite using Rspec
-alias rdb='rake db:migrate'
-alias rtp='rake test:prepare'
+# Rails (more are defined in the oh-my-zsh rails plugin)
 alias bx='bundle exec'
+alias sst='spring status'
+
+# Middleman
+alias ms='bundle exec middleman server'
+alias mc='bundle exec middleman console'
+alias mb='bundle exec middleman build --clean'
 
 # Postgres
 alias startpost='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
 alias stoppost='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log stop'
 alias statpost='ps aux | ag postgres'
+alias psq='psql -d postgres'
 
 # Homebrew
 alias bu='brew update'
@@ -107,6 +110,9 @@ alias upc='softwareupdate -l'
 
 # Download and install OS X updates
 alias upd='softwareupdate -i -a'
+
+# Misc
+alias color='colortest -w -s'
 # }}}
 
 
@@ -147,11 +153,13 @@ ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%}-%{$fg[white]%}"
 ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg[magenta]%}>%{$fg[white]%}"
 ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[yellow]%}═%{$fg[white]%}"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[cyan]%}#%{$fg[white]%}"
+ZSH_THEME_GIT_PROMPT_SHA_BEFORE=" %{$fg[green]%}"
+ZSH_THEME_GIT_PROMPT_SHA_AFTER="%{$fg[reset_color]%}"
 
 local user='%{$fg[green]%}%m:%{$reset_color%}'
 local ssh_user='%{$fg[magenta]%}%n@%m:%{$reset_color%}'
 local pwd='%{$fg[blue]%}%~%{$reset_color%}'
-local git='%{$fg[white]%}$(my_git_branch)%{$reset_color%}'
+local git='$(git_prompt_short_sha)%{$fg[white]%}$(my_git_branch)%{$reset_color%}'
 
 _rubyprompt() {
   if [ $COLUMNS -gt 80 ]; then
@@ -227,7 +235,7 @@ cdpath=($HOME/code $HOME/Developer $HOME/Sites $HOME/vms $HOME/Dropbox $HOME)
 
 # functions {{{
 randpw() {
-  openssl rand -base64 4 | md5 | head -c8 ; echo
+  openssl rand -base64 4 | md5 | head -c$1 ; echo
 }
 
 # Determine size of a file or total size of a directory
@@ -255,4 +263,8 @@ eval "$(rbenv init -)"
 
 # Include local settings {{{
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+# }}}
+
+# Travis CI {{{
+[ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
 # }}}

@@ -90,7 +90,7 @@ set shortmess+=I
 
 " Better splits (new windows appear below and to the right)
 set splitbelow
-" set splitright
+set splitright
 
 " Highlight the current line and column
 set cursorline
@@ -126,7 +126,7 @@ set tags=./tags;
 
 set t_Co=256
 
-set fillchars+=vert:\ 
+set fillchars+=vert:\|
 
 " Vertical line at 80 characters
 set textwidth=80
@@ -182,7 +182,6 @@ Plugin 'skwp/greplace.vim'                " Global search and replace for vi    
 Plugin 'rking/ag.vim'                     " Vim plugin for the_silver_searcher                    | https://github.com/rking/ag.vim
 Plugin 'christoomey/vim-tmux-navigator'   " Seamless navigation between tmux panes and vim splits | https://github.com/christoomey/vim-tmux-navigator
 Plugin 'ctrlpvim/ctrlp.vim'               " Active fork of kien/ctrlp.vim—Fuzzy file finder       | https://github.com/ctrlpvim/ctrlp.vim
-Plugin 'joshukraine/yankmatches'          " Damian Conway's yankmatches plugin for vim            | https://github.com/joshukraine/yankmatches
 Plugin 'joshukraine/dragvisuals'          " Damian Conway's dragvisuals plugin for vim            | https://github.com/joshukraine/dragvisuals
 
 " Look and Feel
@@ -190,28 +189,22 @@ Plugin 'altercation/vim-colors-solarized' " Precision colorscheme for the vim te
 Plugin 'bling/vim-airline'                " Status/tabline for vim                                | https://github.com/bling/vim-airline
 
 " Tim Pope
-Plugin 'tpope/vim-fugitive'               " Git wrapper for vim                                   | https://github.com/tpope/vim-fugitive
-Plugin 'tpope/vim-git'                    " Vim Git runtime files                                 | https://github.com/tpope/vim-git
 Plugin 'tpope/vim-endwise'                " Add 'end' keyword when needed                         | https://github.com/tpope/vim-endwise
 Plugin 'tpope/vim-surround'               " Quoting/parenthesizing made simple                    | https://github.com/tpope/vim-surround
 Plugin 'tpope/vim-rails'                  " Ruby on Rails power tools                             | https://github.com/tpope/vim-rails
-Plugin 'tpope/vim-ragtag'                 " HTML/XML mappings                                     | https://github.com/tpope/vim-ragtag
 Plugin 'tpope/vim-obsession'              " Continuously updated session files                    | https://github.com/tpope/vim-obsession
 Plugin 'tpope/vim-rake'                   " Extended funtionality for rails.vim                   | https://github.com/tpope/vim-rake
 Plugin 'tpope/vim-bundler'                " Vim goodies for Bundler, rails.vim, rake.vim          | https://github.com/tpope/vim-bundler
-
+Plugin 'tpope/vim-ragtag'                 " HTML/XML tag mappings                                 | https://github.com/tpope/vim-ragtag
 
 " Related to testing & tmux
-Plugin 'benmills/vimux'                   " Vim plugin to interact with tmux                      | https://github.com/benmills/vimux
-Plugin 'jgdavey/tslime.vim'               " Send command from vim to a running tmux session       | https://github.com/jgdavey/tslime.vim
 Plugin 'thoughtbot/vim-rspec'             " Run Rspec specs from Vim                              | https://github.com/thoughtbot/vim-rspec
-Plugin 'skalnik/vim-vroom'                " A vim plugin for running your Ruby tests              | https://github.com/skalnik/vim-vroom
+Plugin 'christoomey/vim-tmux-runner'      " Command runner for sending commands from vim to tmux. | https://github.com/christoomey/vim-tmux-runner
 
 " Related to vim-snipmate
 Plugin 'MarcWeber/vim-addon-mw-utils'     " [vim-snipmate dependency]                             | https://github.com/MarcWeber/vim-addon-mw-utils
 Plugin 'tomtom/tlib_vim'                  " [vim-snipmate dependency]                             | https://github.com/tomtom/tlib_vim
 Plugin 'garbas/vim-snipmate'              " Textmate-style snippet behavior for vim               | https://github.com/garbas/vim-snipmate
-" Plugin 'honza/vim-snippets'               " vim-snipmate default snippets                         | https://github.com/honza/vim-snippets
 Plugin 'joshukraine/vim-snippets'         " My customized vim-snippets                            | https://github.com/joshukraine/vim-snippets
 
 " Other
@@ -220,8 +213,10 @@ Plugin 'bronson/vim-trailing-whitespace'  " Highlights trailing whitespace in re
 Plugin 'duff/vim-scratch'                 " Create a temporary scratch buffer                     | https://github.com/duff/vim-scratch
 Plugin 'airblade/vim-gitgutter'           " Shows a git diff in the 'gutter'                      | https://github.com/airblade/vim-gitgutter
 Plugin 'mattn/webapi-vim'                 " Allow vim to interface with web APIs                  | https://github.com/mattn/webapi-vim
-Plugin 'vim-scripts/Gist.vim'             " Post gists from vim                                   | https://github.com/vim-scripts/Gist.vim
+Plugin 'mattn/gist-vim'                   " Post gists from vim                                   | https://github.com/mattn/gist-vim
 Plugin 'Glench/Vim-Jinja2-Syntax'         " An up-to-date jinja2 syntax file                      | https://github.com/Glench/Vim-Jinja2-Syntax
+Plugin 'xolox/vim-notes'
+Plugin 'xolox/vim-misc'
 
 " All of your Plugins must be added before the following line
 call vundle#end()                         " required
@@ -232,7 +227,7 @@ filetype plugin indent on                 " required
 
 " General Mappings {{{
 
-let mapleader = " "
+let mapleader = "\<Space>"
 
 " Misc
 map <leader>ev :tabe ~/.vimrc<CR>
@@ -245,13 +240,14 @@ map <leader>p :set paste<CR>o<esc>"*]p:set nopaste<CR> " Fix indentation on past
 map <leader>i mmgg=G`m<CR> " For indenting code
 map <leader>h :nohl<CR> " Clear highlights
 map <leader>s :%s/\s\+$//e<CR> " Manually clear trailing whitespace
-imap <C-[> <C-c> " Return to normal mode faster
-map <C-t> <esc>:tabnew<CR> " Open a new tab with Ctrl+T
+imap <C-[> <Esc>:w<CR> " Return to normal mode faster + write file
 inoremap jj <C-c> " jj to switch back to normal mode
 nnoremap <leader><leader> <c-^> " Switch between the last two files
+map <C-t> <esc>:tabnew<CR> " Open a new tab with Ctrl+T
 map Q <Nop> " Disable Ex mode
 map K <Nop> " Disable K looking stuff up
 nmap <leader>O O<Esc> " Add new line ABOVE without leaving normal mode
+map <C-n> :vs note:<CR>
 
 " Delete all lines beginning with '#' regardless of leading space.
 map <leader>d :g/^\s*#.*/d<CR>:nohl<CR>
@@ -267,19 +263,19 @@ nnoremap <leader>= :wincmd =<cr>
 " Force vim to use 'very magic' mode for regex searches
 nnoremap / /\v
 
-" Reminders :)
-nnoremap <Left> :echoe "Use h"<CR>
-nnoremap <Right> :echoe "Use l"<CR>
-nnoremap <Up> :echoe "Use k"<CR>
-nnoremap <Down> :echoe "Use j"<CR>
-
 " }}}
 
 
 " Plugin-specific Mappings and Settings {{{
 
 " NERDTree
+nmap <silent> <F3> :NERDTreeToggle<CR>
 map <leader>\ :NERDTreeToggle<CR>
+let g:NERDTreeWinSize=25
+let NERDTreeShowHidden=1
+
+" Toggle GitGutter
+nnoremap <F4> :GitGutterToggle<CR>
 
 " Tcomment
 map <leader>/ :TComment<CR>
@@ -295,36 +291,16 @@ map <leader>f :call RunCurrentSpecFile()<CR>
 map <leader>n :call RunNearestSpec()<CR>
 map <leader>l :call RunLastSpec()<CR>
 map <leader>a :call RunAllSpecs()<CR>
-let g:rspec_command = 'call VimuxRunCommand("clear; bin/rspec {spec}")'
+let g:rspec_command = 'VtrSendCommandToRunner! clear; bin/rspec {spec}'
 
-" vroom.vim (alternative plugin to vim-rspec)
-" map <leader>n :VroomRunNearestTest<CR>
-" map <leader>f :VroomRunTestFile<CR>
-" map <leader>l :VroomRunLastTest<CR>
-" let g:vroom_use_vimux = 1
-" let g:vroom_use_colors = 1
-" let g:vroom_use_bundle_exec = 0
-" let g:vroom_map_keys = 0
-" let g:vroom_clear_screen = 0
-
-" Vimux
-" Prompt for a command to run map
-map <leader>vp :VimuxPromptCommand<CR>
-
-" Inspect runner pane map
-map <leader>vi :VimuxInspectRunner<CR>
-
-" Close vim tmux runner opened by VimuxRunCommand. If a pane is closed manually,
-" the vim-rspec commands will no longer cause a new pane to open. Calling
-" :VimuxCloseRunner() will 'reset' Vimux, after which the vim-rspec commands
-" will pop open a new pane as they did initially.
-map <leader>vq :VimuxCloseRunner<CR>
-
-" Zoom the tmux runner page
-map <leader>vz :VimuxZoomRunner<CR>
-
-" Set the size of the vimux window.
-let g:VimuxHeight = "30"
+" vim-tmux-runner
+let g:VtrPercentage = 20
+let g:VtrUseVtrMaps = 1
+nnoremap <leader>sd :VtrSendCtrlD<cr>
+nmap <leader>fs :VtrFlushCommand<cr>:VtrSendCommandToRunner<cr>
+nmap <leader>osp :VtrOpenRunner {'orientation': 'v', 'percentage': 20, 'cmd': '' }<cr>
+nmap <leader>orc :VtrOpenRunner {'orientation': 'h', 'percentage': 40, 'cmd': 'rc'}<cr>
+nmap <leader>opr :VtrOpenRunner {'orientation': 'h', 'percentage': 40, 'cmd': 'pry'}<cr>
 
 " CtrlP
 map <leader>t <C-p>
@@ -340,7 +316,7 @@ let g:ctrlp_arg_map = 1
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*.,*/.DS_Store
 
 " CtrlP -> directories to ignore when fuzzy finding
-let g:ctrlp_custom_ignore = '\v[\/]((node_modules)|\.(git|svn|grunt|sass-cache))$'
+let g:ctrlp_custom_ignore = '\v[\/]((build|node_modules)|\.(git|sass-cache))$'
 
 " Custom rails.vim commands
 command! Rroutes :e config/routes.rb
@@ -352,17 +328,16 @@ command! RTfactories :tabe spec/factories.rb
 command! RSfactories :sp spec/factories.rb
 command! RVfactories :vs spec/factories.rb
 
-" vim-scratch
-map <C-s> :Sscratch<CR>
-
 " Gist settings
 let g:github_user = $GITHUB_USER
 let g:github_token = $GITHUB_TOKEN
 let g:gist_detect_filetype = 1
-let g:gist_open_browser_after_post = 1
+let g:gist_open_browser_after_post = 0
+let g:gist_post_private = 1
+let g:gist_show_privates = 1
+let g:gist_clip_command = 'pbcopy'
 
 " Key mappings for dragvisuals.vim
-
 runtime bundle/dragvisuals/plugins/dragvisuals.vim
 
 vmap  <expr>  <LEFT>   DVB_Drag('left')
@@ -373,6 +348,10 @@ vmap  <expr>  D        DVB_Duplicate()
 
 " Remove any introduced trailing whitespace after moving...
 let g:DVB_TrimWS = 1
+
+" Notes.vim
+let g:notes_directories = ['~/Dropbox/Notes']
+let g:notes_suffix = '.md'
 " }}}
 
 
@@ -389,7 +368,7 @@ au BufNewFile,BufRead *.txt setlocal nolist " Don't display whitespace
 " file formats
 autocmd Filetype gitcommit setlocal spell textwidth=72
 autocmd Filetype sh,markdown setlocal wrap linebreak nolist textwidth=0 wrapmargin=0 " http://vim.wikia.com/wiki/Word_wrap_without_line_breaks
-autocmd FileType sh,cucumber,ruby,yaml,html,zsh,vim,css,scss,gitconfig setlocal shiftwidth=2 tabstop=2 expandtab
+autocmd FileType sh,cucumber,ruby,yaml,html,zsh,vim,css,scss,javascript,gitconfig setlocal shiftwidth=2 tabstop=2 expandtab
 
 " autoindent with two spaces, always expand tabs
 autocmd FileType ruby,eruby,yaml setlocal ai sw=2 sts=2 et
@@ -404,9 +383,9 @@ au BufWritePre *.rb :%s/\s\+$//e
 " Fold settings
 autocmd BufRead * setlocal foldmethod=marker
 autocmd BufRead * normal zM
-autocmd BufRead *.rb setlocal foldmethod=syntax
-autocmd BufRead *.rb normal zR
-set foldnestmax=3
+" autocmd BufRead *.rb setlocal foldmethod=syntax
+" autocmd BufRead *.rb normal zR
+" set foldnestmax=3
 
 " Close vim if only nerdtree window is left
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
@@ -459,5 +438,12 @@ colorscheme solarized
 
 highlight clear IncSearch
 highlight IncSearch term=reverse cterm=reverse ctermfg=7 ctermbg=0 guifg=Black guibg=Yellow
+highlight VertSplit ctermbg=NONE guibg=NONE
+" }}}
 
+
+" Include local settings {{{
+if filereadable(glob("$HOME/.vimrc.local"))
+  source $HOME/.vimrc.local
+endif
 " }}}
