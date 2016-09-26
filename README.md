@@ -36,7 +36,7 @@ Installation
 ------------
 
 ```sh
-git clone https://github.com/joshukraine/dotfiles.git ~/dotfiles
+git clone https://github.com/kelsiesteele/dotfiles.git ~/dotfiles
 source ~/dotfiles/install.sh
 ```
 
