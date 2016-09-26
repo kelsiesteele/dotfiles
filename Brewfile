@@ -75,8 +75,6 @@ brew "thoughtbot/formulae/gitsh"
 
 # homebrew-cask
 # https://github.com/caskroom/homebrew-cask
-cask "alfred"
-cask "applepi-baker"
 cask "atom"
 cask "bartender"
 cask "carbon-copy-cloner"
@@ -85,26 +83,13 @@ cask "crashplan"
 cask "daisydisk"
 cask "dropbox"
 cask "fantastical"
-cask "firefox"
 cask "google-chrome"
 cask "google-drive"
 cask "hazel"
-cask "hipchat"
 cask "istat-menus"
 cask "iterm2"
-cask "little-snitch"
-cask "namebench"
-cask "ngrok"
-cask "opera"
-cask "postico"
-cask "razer-synapse"
-cask "screenflick"
-cask "sketch"
+cask "private-internet-access"
 cask "skype"
-cask "the-unarchiver"
-cask "vagrant"
-cask "virtualbox"
-cask "vlc"
 
 # mas-cli
 # https://github.com/argon/mas
@@ -117,12 +102,7 @@ mas "Evernote", id: 406056744
 mas "1Password", id: 443987910
 mas "e-Sword X", id: 968437868
 mas "Marked 2", id: 890031187
-mas "Tweetbot", id: 557168941
 mas "Pages", id: 409201541
 mas "Byword", id: 420212497
-mas "Dash", id: 449589707
-mas "OmniFocus", id: 867299399
-mas "Pixelmator", id: 407963104
 mas "Numbers", id: 409203825
 mas "Gemini 2", id: 1090488118
-mas "Scrivener", id: 418889511
