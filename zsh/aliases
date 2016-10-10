@@ -68,10 +68,8 @@ alias mcc='bundle exec middleman console'
 alias mbb='bundle exec middleman build --clean'
 
 # Postgres
-alias startpost='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
-alias stoppost='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log stop'
 alias statpost='ps aux | ag postgres'
-alias psq='psql -d postgres'
+alias psq='pgcli -d postgres'
 
 # Homebrew
 alias bu='brew update'
@@ -79,6 +77,12 @@ alias bg='brew upgrade --all'
 alias bo='brew outdated'
 alias bd='brew doctor'
 alias bc='brew cleanup'
+alias bs='brew services'
+alias bsc='brew services cleanup'
+alias bsl='brew services list'
+alias bsr='brew services restart'
+alias bs0='brew services stop'
+alias bs1='brew services start'
 
 # Mac App Store (https://github.com/argon/mas)
 alias masi='mas install'
