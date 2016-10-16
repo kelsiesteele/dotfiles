@@ -255,9 +255,6 @@ nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
 " zoom back out
 nnoremap <leader>= :wincmd =<cr>
 
-" Force vim to use 'very magic' mode for regex searches
-nnoremap / /\v
-
 " }}}
 
 " Plugin-specific Mappings and Settings {{{
@@ -267,8 +264,6 @@ nmap <silent> <F3> :NERDTreeToggle<CR>
 map <leader>\ :NERDTreeToggle<CR>
 let g:NERDTreeWinSize=25
 let NERDTreeShowHidden=1
-let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'
 
 " Toggle GitGutter
 nnoremap <F4> :GitGutterToggle<CR>

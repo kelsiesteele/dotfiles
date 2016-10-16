@@ -75,10 +75,10 @@ alias bx='bundle exec'
 alias sst='spring status'
 
 # Middleman
-alias mss='bundle exec middleman server'
-alias msg='bundle exec middleman server -e gulp'
-alias mcc='bundle exec middleman console'
-alias mbb='bundle exec middleman build --clean'
+alias mm='bundle exec middleman'
+alias mms='bundle exec middleman server'
+alias mmc='bundle exec middleman console -e console'
+alias mmb='bundle exec middleman build --clean'
 
 # npm (borrowed from Oh-My-Zsh npm plugin)
 alias npmG='npm install --global'
@@ -105,6 +105,10 @@ alias bsl='brew services list'
 alias bsr='brew services restart'
 alias bs0='brew services stop'
 alias bs1='brew services start'
+alias brews='brew list -1'
+alias bubo='brew update && brew outdated'
+alias bubc='brew upgrade && brew cleanup'
+alias bubu='bubo && bubc'
 
 # Mac App Store (https://github.com/argon/mas)
 alias masi='mas install'
