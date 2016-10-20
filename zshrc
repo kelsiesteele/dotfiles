@@ -11,15 +11,23 @@ export SOURCE_ANNOTATION_DIRECTORIES="spec"
 setopt auto_cd
 cdpath=($HOME/code $HOME/Dropbox $HOME)
 
-HISTSIZE=20000
-SAVEHIST=20000
+HISTSIZE=1000000
+SAVEHIST=1000000
 HISTFILE=~/.zsh_history
+HIST_STAMPS="yyyy-mm-dd"
 
 source $HOME/dotfiles/zsh/oh-my-zsh
 source $HOME/dotfiles/zsh/aliases
 source $HOME/dotfiles/zsh/prompt
 source $HOME/dotfiles/zsh/tmux
 source $HOME/dotfiles/zsh/functions
+source $HOME/dotfiles/zsh/z.sh
+
+# hub - https://github.com/github/hub#aliasing
+# Insecure directories error? http://stackoverflow.com/a/13785716
+eval "$(hub alias -s)"
+fpath=(~/.zsh/completion /usr/local/share/zsh/site-functions $fpath)
+autoload -U compinit && compinit
 
 # rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"

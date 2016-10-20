@@ -13,7 +13,9 @@ _rubyprompt() {
 }
 
 function my_remote_status() {
-  echo "$(git_commits_ahead)$(git_commits_behind)"
+  if [[ -n "$(command git show-ref origin/$(git_current_branch) 2> /dev/null)"  ]]; then
+    echo "$(git_commits_ahead)$(git_commits_behind)"
+  fi
 }
 
 # Adapted from git_prompt_info(): oh-my-zsh/lib/git.zsh
@@ -44,11 +46,11 @@ ZSH_THEME_GIT_PROMPT_STASHED="%{$fg[yellow]%}⚑"
 ZSH_THEME_GIT_PROMPT_SHA_BEFORE="%{$fg[green]%}"
 ZSH_THEME_GIT_PROMPT_SHA_AFTER="%{$reset_color%}"
 
-local datetime='[%{$fg[yellow]%}%D{%Y-%m-%d %H:%M:%S}%{$reset_color%}]'
+local timestamp='[%{$fg[yellow]%}%*%{$reset_color%}]'
 local pwd='%{$fg[blue]%}%~%{$reset_color%}'
 local git='$(my_git_prompt)$(git_prompt_short_sha)'
 
-PROMPT="${datetime} ${pwd} ${git}
+PROMPT="${timestamp} ${pwd} ${git}
 %(?..%{$fg[red]%})%B$%b "
 
 setopt transient_rprompt # only show the rprompt on the current prompt
