@@ -7,6 +7,7 @@ export MANPAGER="less -X" # Don’t clear the screen after quitting a manual pag
 export TERM="screen-256color"
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 export SOURCE_ANNOTATION_DIRECTORIES="spec"
+export DISABLE_AUTO_TITLE=true
 
 setopt auto_cd
 cdpath=($HOME/code $HOME/Dropbox $HOME)
@@ -22,12 +23,6 @@ source $HOME/dotfiles/zsh/prompt
 source $HOME/dotfiles/zsh/tmux
 source $HOME/dotfiles/zsh/functions
 source $HOME/dotfiles/zsh/z.sh
-
-# hub - https://github.com/github/hub#aliasing
-# Insecure directories error? http://stackoverflow.com/a/13785716
-eval "$(hub alias -s)"
-fpath=(~/.zsh/completion /usr/local/share/zsh/site-functions $fpath)
-autoload -U compinit && compinit
 
 # rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"

@@ -47,6 +47,7 @@ alias ldot='ls -ld .*'
 alias lS='ls -1FSsh'
 alias lart='ls -1Fcart'
 alias lrt='ls -1Fcrt'
+alias ld='ls -ld' # Useful for showing permissions of a single directory
 
 # Finding stuff!
 alias fd='find . -type d -name'
@@ -108,6 +109,8 @@ alias gst='git status'
 
 alias gtl='git tag --list | sort -r'
 
+alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify -m "--wip--"'
+
 # Upgrade Oh My Zshell
 alias upz='upgrade_oh_my_zsh'
 
@@ -115,9 +118,12 @@ alias upz='upgrade_oh_my_zsh'
 alias saf='defaults write com.apple.finder AppleShowAllFiles TRUE; killall Finder'
 alias haf='defaults write com.apple.finder AppleShowAllFiles FALSE; killall Finder'
 
-# Rails (more are defined in the oh-my-zsh rails plugin)
+# Rails
 alias bx='bundle exec'
 alias sst='spring status'
+
+# Pow/Powder
+alias pw='powder'
 
 # Middleman
 alias mm='bundle exec middleman'
@@ -166,6 +172,10 @@ alias masu='mas upgrade'
 alias rbv='rbenv versions'
 alias rbl='rbenv install -l | ag "^\s+[0-9].*" --nocolor'
 
+# Ansible
+alias ans='ansible'
+alias ap='ansible-playbook'
+
 # Finder
 alias o='open . &'
 
@@ -177,3 +187,4 @@ alias upd='softwareupdate -i -a'
 
 # Misc
 alias color='colortest -w -s'
+alias hangout='open https://hangouts.google.com/hangouts/_'
