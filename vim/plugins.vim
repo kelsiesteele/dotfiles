@@ -32,6 +32,7 @@ Plugin 'joshukraine/dragvisuals'          " Damian Conway's dragvisuals plugin f
 Plugin 'altercation/vim-colors-solarized' " Precision colorscheme for the vim text editor         | https://github.com/altercation/vim-colors-solarized
 Plugin 'vim-airline/vim-airline'          " Status/tabline for vim                                | https://github.com/vim-airline/vim-airline
 Plugin 'vim-airline/vim-airline-themes'   " A collection of themes for vim-airline                | https://github.com/vim-airline/vim-airline-themes
+Plugin 'plasticboy/vim-markdown'          " Syntax highlighting and more for markdown             | https://github.com/plasticboy/vim-markdown
 
 " Tim Pope
 Plugin 'tpope/vim-endwise'                " Add 'end' keyword when needed                         | https://github.com/tpope/vim-endwise
@@ -63,6 +64,7 @@ Plugin 'mattn/webapi-vim'                 " Allow vim to interface with web APIs
 Plugin 'Glench/Vim-Jinja2-Syntax'         " An up-to-date jinja2 syntax file                      | https://github.com/Glench/Vim-Jinja2-Syntax
 Plugin 'slim-template/vim-slim'           " Slim syntax highlighting                              | https://github.com/slim-template/vim-slim
 Plugin 'jiangmiao/auto-pairs'             " Insert or delete brackets, parens, quotes in pair.    | https://github.com/jiangmiao/auto-pairs
+Plugin 'lifepillar/vim-cheat40'           " A Vim cheat sheet that makes sense, inside Vim!       | https://github.com/lifepillar/vim-cheat40
 
 " All of your Plugins must be added before the following line
 call vundle#end()                         " required

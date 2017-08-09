@@ -8,6 +8,7 @@ export TERM="screen-256color"
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 export SOURCE_ANNOTATION_DIRECTORIES="spec"
 export DISABLE_AUTO_TITLE=true
+export _Z_OWNER=$USER
 
 setopt auto_cd
 cdpath=($HOME/code $HOME/Dropbox $HOME)
