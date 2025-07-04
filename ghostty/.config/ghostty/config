@@ -7,7 +7,7 @@
 theme = tokyonight_moon
 
 # Font settings
-font-family = Cascadia Code
+font-family = Cascadia Code NF
 font-size = 17
 adjust-cell-height = 6
 
