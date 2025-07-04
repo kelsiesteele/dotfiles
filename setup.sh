@@ -134,12 +134,12 @@ for item in *; do
 done
 
 if command -v tmux &>/dev/null; then
-  if [ ! -d "${HOME}/.terminfo" ]; then
-    dotfiles_echo "Installing custom terminfo entries..."
-    # These entries enable, among other things, italic text in the terminal.
-    tic -x "${DOTFILES}/terminfo/tmux-256color.terminfo"
-    tic -x "${DOTFILES}/terminfo/xterm-256color-italic.terminfo"
-  fi
+  # if [ ! -d "${HOME}/.terminfo" ]; then
+  #   dotfiles_echo "Installing custom terminfo entries..."
+  #   # These entries enable, among other things, italic text in the terminal.
+  #   tic -x "${DOTFILES}/terminfo/tmux-256color.terminfo"
+  #   tic -x "${DOTFILES}/terminfo/xterm-256color-italic.terminfo"
+  # fi
 
   if [ ! -d "${DOTFILES}/tmux/.config/tmux/plugins" ]; then
     dotfiles_echo "Installing Tmux Plugin Manager..."
