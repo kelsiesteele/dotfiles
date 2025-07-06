@@ -1,0 +1,61 @@
+#!/usr/bin/env ruby
+
+# Usage: git publish <remote-branch-name>
+# Open the pull request page for <branch>, or the current branch if not
+# specified. Lands on the new pull request page when no PR exists yet.
+# The local branch must be tracking the remote branch.
+
+def read_current_branch
+  `git rev-parse --abbrev-ref HEAD`.chomp
+end
+
+# Detects the default branch name for a given remote (e.g., 'origin')
+def detect_default_branch(remote_name = "origin")
+  # git remote show <remote_name> output looks like:
+  #   * remote origin
+  #     Fetch URL: ...
+  #     Push  URL: ...
+  #     HEAD branch: main
+  #     Remote branches:
+  #       main tracked
+  #       feature/foo tracked
+  #     Local branches configured for 'git pull':
+  #       main merges with remote main
+  #     Local refs configured for 'git push':
+  #       main pushes to remote main (up to date)
+  # We want to extract the line starting with "HEAD branch: "
+
+  remote_info = `git remote show #{remote_name} 2>&1`
+  match = remote_info.match(/HEAD branch:\s*(\S+)/)
+
+  if match && match[1]
+    match[1].chomp
+  else
+    # Fallback if detection fails (e.g., no remote yet, or unusual config)
+    # Most common defaults are 'main' then 'master'.
+    # This might need refinement based on actual common practices or project setups.
+    warn "Could not detect default branch for remote '#{remote_name}'. Falling back to 'main'."
+    "main"
+  end
+end
+
+def main
+  current_branch = read_current_branch
+  remote_name = ARGV[0] || "origin" # Allow specifying remote, default to origin
+
+  default_branch = detect_default_branch(remote_name)
+
+  if current_branch == default_branch
+    warn "Currently on the default branch (#{default_branch}), aborting. Please switch to your feature branch."
+    exit 1
+  else
+    # Check if the branch already exists on the remote, might be useful
+    # for avoiding "already up to date" messages or giving more specific guidance.
+    # However, 'git push -u' handles this gracefully.
+
+    # Push the current branch to the remote, setting upstream tracking
+    system("git push -u #{remote_name} #{current_branch}:#{current_branch}")
+  end
+end
+
+main
