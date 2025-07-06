@@ -5,7 +5,7 @@ else
 fi
 
 export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$HOME/.local/bin:$HOME/.bin:$PATH"
-# export EDITOR="nvim"
+export EDITOR="code --wait" # Use Visual Studio Code as the default editor
 # export GIT_EDITOR="nvim"
 # export BUNDLER_EDITOR=$EDITOR
 export MANPAGER="less -X" # Don’t clear the screen after quitting a manual page
